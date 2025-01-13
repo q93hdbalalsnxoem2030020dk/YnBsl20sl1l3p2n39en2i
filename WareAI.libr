@@ -1,0 +1,514 @@
+local StarterGui = game:GetService("StarterGui")
+--// SRV
+
+
+
+
+
+
+--[[ 
+/**
+ * Open Source Library - Do not modify!
+ *
+ * This file is part of WareAI, an open source library for bypassing robust anticheat in game
+ * While this project is open source, modifications to this specific file are strongly discouraged.
+ *
+ * WARNING:
+ * This code is critical for exploiting and "bypass" the anticheat itself
+ * Modifying it may lead to unexpected behavior or break functionality of the WareAI.
+ * If changes are absolutely necessary, please:
+ * 1. Consult with YxGG or sxc_qq1 in discord 
+ * 2. Thoroughly test any modifications
+ * 3. Submit changes through the official contribution process
+ *
+ * For more information about WareAI/Lib-WareAI and how to contribute, please contact:
+ * sunshinexjuhari@protonmail.com
+ *
+ * By using this library, you acknowledge that while the source is open,
+ * responsible usage and contribution are essential for the project's integrity.
+ */
+]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--[[
+basic integration,classes + mtd
+
+ |          !   INDICATOR, ABBV ?NOTE.    !
+  ASN = Assign, assigning a value, property, ? functionality to a variable, object, ? configuration. This is used to define behaviors ?UND + link functions, ?set up parameters for operation. 
+  PRV = Prevent, preventing (mtd) from (player), ?MTD : (reason) as ()
+  MTD = Method, used by prv, mnp, clss ?BYP ?MNP
+  CLSS = Classes
+  NTI = Init, runned by functions ?classes *, a statement/code that runs another function ?mult-classes ?when a function call is more than 1 + ?bigger than the first value of the number, ?*
+  BYP = Bypass, break through, skipping a function ?system, *UND
+  MNP = Manipulation, Tricking ?going through without noticing + ?making a way without attention ?altering the content of a string ?*
+  IN = Inside, to indicate where's this statement goal, (mtd) ,?clss
+  SCR = Script, UND
+  CFG = Config ?configuration
+  X = Not, ?not included + isn't the same, ?diff purposes , UND.
+  -----------
+
+  ADDT:
+
+  NONE = Empty / Not there, undefined
+  UND = Undefined ?don't know, cannot be determined / hard to tell.
+  MULT-SRV = Multiple services, if service is more than 1, optional.
+  MULT-? = Multiple (additional note) as "?", if additional or optional and not specific, classes nor integration ?etc.
+  () = Store or Note for message, can be with () ?after mult ?services *
+  ? = Or, same as "/" or "or"
+  * = multiple reason ?cases, can't be counted ?UND
+  : = used after ?before, as an "result" of the previous () ?message, *
+  + = With, optional ?can use "," for simple term
+  = = Equal, ?meaning + ?result, can be used in a value ?etc
+  !!! = NTBU + ?Need to be updated, used on a part of code ?lines if code ?line need to be changed ?error, if has something that is not fully supported ?cannot be there + ?revising, ?outdated
+  ABBV = Abbreviation 
+  ADDT = Additional, seperated from main message ?note ?etc, seperated if too many
+  ADDR = Address, lines ?exactly the ~ code, ?used for a value ?UND
+ |
+  
+]]
+
+local g = getgenv()
+g["_exp"] = {}
+local e = g["_exp"]
+
+e["cfg"] = {
+    pk = true, -- // BYP, PRV:Kick
+    ms = true, -- // MNP, MTD:Remote
+    bc = true, -- // BYP, MTD:Ban
+    si = true, -- // UND, NONE
+    ac = true, -- // MNP, MTD:Spoof
+    ma = true, -- // UND ?*
+    dm = true, -- // MNP, *
+    sc = true, -- // UND, NONE
+    lg = true, -- // LOG, NONE
+    sp = true, -- // UND, NONE
+    hk = true  -- // UND, NONE
+    --// NONE, !!!
+}
+
+--// MULT-SRV, ( LP, MT, WS, RS, HT) + GT = X
+e["cls"] = {
+    lp = game.Players.LocalPlayer,
+    mt = getrawmetatable(game),
+    ws = game.Workspace,
+    rs = game.ReplicatedStorage,
+    ht = game.HttpService,
+    gt = getrenv()
+}
+
+e["fn"] = {}
+
+--// MULT-* ( catch ) ?*
+e["fn"]["try"] = function(func)
+    return function(...)
+        local s, r = pcall(func, ...)
+        if not s then
+            print("[Lib-WareAI] Warning:", r)
+        end
+        return r
+    end
+end
+
+--// MULT-*, ?UND
+print("USING: WareAI (version :1.3_a.bt, classes=tr)")
+print("USING: Lib-WareAI (version :1.1_beta, classes=fls)")
+print("") --// NONE
+print("") --// NONE
+
+local wr_lgg = [[
+
+=========================================
+              WareAI Bypass
+=========================================
+ Version: 1.3_a.bt
+ Lastest version? Yes
+-----------------------------------------
+ What does it do?
+ - Bypasses and manipulates advanced anti-cheat systems.
+ - Provides exploit-level integration for Roblox games.
+ - Ensures stability with error handling.
+
+ Why is it important?
+ - Protects your script from being interrupted by anti-cheats.
+ - Allows full control over game mechanics without restrictions.
+ - Supports customization and toggles for various bypass features.
+
+ Is it good?
+ - ✅ Advanced anti-detection capabilities.
+ - ✅ Robust function isolation.
+ - ✅ Reliable and easy-to-use framework.
+ - ✅ Already provided an easy-to-use library
+
+-----------------------------------------
+   Developed by sxc_qq1 / YxGG Team
+=========================================
+----------------------------
+
+CURRENT:
+WareAI     (Now)
+Lib-WareAI (Now)
+ - ROLE >
+    WareAI = Main, anticheat bypass.
+    Lib-WareAI = Second, log generator, library handler
+
+........................
+ADDITIONAL INFORMATION:
+pk.    : PRV, MTD:K
+ms.    : PRV, MTD:RE ?RF
+bc.    : BYP, MTD:BN
+si.    : BYP, IN:INTEG
+ac.    : UND, NONE
+ma.    : MNP, MTD:UND
+dm.    : MNP, MTD:UND
+sc.    : SCR, MTD:CONT ?EXT
+lg.    : LOG, NONE
+sp.    : UND, *
+hk.    : UND, *
+
+SERVICE:
+lp : LOCALPLAYER
+mt : METATABLE
+ws : WORKSPACE
+rs : REPLICATEDSTORAGE
+ht : HTTPSERVICE
+
+]]
+print("")
+print("[Lib-WareAI] Generated: MULT-CLSS IN (PRV MTD:Access ?CLSS:UND). ASN:FUNC (IN SCR) ?ADDR:CFG. BYP MNP:AntiCheat ?PRV(IN:Player). MULT-SRV active (HT, RS). !!! ADDT PRV MTD:ExploitPatch (reason: INACTIVE FLAG). sc: SCR, NTI MULT-MTD , UND/MULT-SERVICES.")
+
+local WareAI = {} --// () ?Storage
+
+WareAI.Starter = { --// CFG
+    intro_cons = false, --//DEF
+    auto_cons = false   --//DEF
+}
+
+-- // UND, ?MULT-CLSS ( Lib ) :
+-- // !!!, !!!, !!! ( Need to be updated )
+function WareAI.Init()
+    if not WareAI.Starter then
+        print("[Lib-WareAI] WareAI.Starter failed to start, missing init()")
+        return
+    end
+
+    if WareAI.Starter.intro_cons then
+        print(wr_lgg)
+    end
+
+    if WareAI.Starter.auto_cons then --// DV
+        local gui = game:GetService("CoreGui")
+        if gui:FindFirstChild("DevConsole") then
+            gui.DevConsole.Visible = true
+        else
+            game:GetService("StarterGui"):SetCore("DevConsoleVisible", true)
+        end
+    end
+end
+
+--// UND ?*
+e["fn"]["rw"] =
+    e["fn"]["try"](
+    function(st)
+        setreadonly(e["cls"]["mt"], not st)
+    end
+)
+
+-- // BYP, MTD: NONE ?UND
+e["fn"]["pk"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["pk"] then
+            return
+        end
+        e["fn"]["rw"](false)
+
+        local o = e["cls"]["mt"]["__index"]
+        e["cls"]["mt"]["__index"] = function(t, k)
+            if t == e["cls"]["lp"] and k == "Kick" then
+                return function(...)
+                    print("[WareAI] Kick attempt blocked:", ...)
+                    return nil
+                end
+            end
+            return o(t, k)
+        end
+
+        e["fn"]["rw"](true)
+    end
+)
+
+-- // MNP, PRV: *
+e["fn"]["ms"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["ms"] then
+            return
+        end
+        for _, o in pairs(e["cls"]["rs"]:GetDescendants()) do
+            if o:IsA("RemoteEvent") or o:IsA("RemoteFunction") then
+                o.FireServer = function(self, ...)
+                    print("[WareAI] RemoteEvent blocked:", o.Name)
+                    return nil
+                end
+                o.InvokeServer = function(self, ...)
+                    print("[WareAI] RemoteFunction blocked:", o.Name)
+                    return nil
+                end
+            end
+        end
+    end
+)
+
+--// UND
+e["fn"]["bc"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["bc"] then
+            return
+        end
+        e["fn"]["rw"](false)
+
+        local o = e["cls"]["mt"]["__namecall"]
+        e["cls"]["mt"]["__namecall"] =
+            newcclosure(
+            function(self, ...)
+                local m = getnamecallmethod()
+                if m == "Kick" or m == "Ban" then
+                    print("[WareAI] Namecall attempt blocked:", m)
+                    return nil
+                elseif m == "FireServer" or m == "InvokeServer" then
+                    print("[WareAI] Remote manipulation:", m, self.Name)
+                    return o(self, "Bypassed", ...)
+                end
+                return o(self, ...)
+            end
+        )
+
+        e["fn"]["rw"](true)
+    end
+)
+
+e["fn"]["si"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["si"] then
+            return
+        end
+
+        for _, obj in pairs(e["cls"]["ws"]:GetDescendants()) do
+            if obj:IsA("Script") or obj:IsA("ModuleScript") then
+                if obj.Source:lower():find("anti") or obj.Source:lower():find("kick") or obj.Source:lower():find("ban") then
+                    print("[WareAI] Integrity check disabled:", obj.Name)
+                    obj.Disabled = true
+                end
+            end
+        end
+    end
+)
+
+e["fn"]["ac"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["ac"] then
+            return
+        end
+        e["fn"]["rw"](false)
+
+        local gs = game.GetService
+        game.GetService = function(self, n)
+            if n:lower():find("anti") or n:lower():find("cheat") then
+                print("[WareAI] Anti-cheat service spoofed:", n)
+                return {}
+            end
+            return gs(self, n)
+        end
+
+        e["fn"]["rw"](true)
+    end
+)
+
+e["fn"]["ma"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["ma"] then
+            return
+        end
+        e["fn"]["rw"](false)
+
+        for _, obj in pairs(e["cls"]["ws"]:GetDescendants()) do
+            if obj:IsA("Script") or obj:IsA("ModuleScript") then
+                if obj.Source:lower():find("anti") or obj.Source:lower():find("cheat") then
+                    obj.Source = "-- Exploit manipulated this script"
+                    print("[WareAI] MNP, ADDR:", obj.Name)
+                end
+            end
+        end
+
+        local o = e["cls"]["mt"]["__namecall"]
+        e["cls"]["mt"]["__namecall"] =
+            newcclosure(
+            function(self, ...)
+                local m = getnamecallmethod()
+                if m:lower():find("kick") or m:lower():find("ban") then
+                    print("[WareAI] blocked:", m)
+                    return nil
+                elseif m:lower():find("fireserver") or m:lower():find("invokeserver") then
+                    print("[WareAI] bypassed remote call:", m, self.Name)
+                    return o(self, "MTP", ...)
+                end
+                return o(self, ...)
+            end
+        )
+
+        e["fn"]["rw"](true)
+    end
+)
+
+e["fn"]["dm"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["dm"] then
+            return
+        end
+        local env = getfenv()
+        for k, v in pairs(env) do
+            if type(v) == "function" and islclosure(v) then
+                setupvalue(v, 1, nil)
+                print("[WareAI] Cleared function:", k)
+            end
+        end
+    end
+)
+
+--// PRV, SRV: HR (Http Request)
+e["fn"]["sc"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["sc"] then
+            return
+        end
+        hookfunction(
+            game.HttpService.RequestAsync,
+            function(...)
+                print("[WareAI] Intercepted Http request.")
+                return nil
+            end
+        )
+
+        local old = getrenv().getfenv
+        setreadonly(e["cls"]["gt"], false)
+        getrenv().getfenv = function(...)
+            print("[WareAI] Global getfenv intercepted.")
+            return old(...)
+        end
+        setreadonly(e["cls"]["gt"], true)
+    end
+)
+
+--// UND
+e["fn"]["lg"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["lg"] then
+            return
+        end
+
+        e["fn"]["rw"](false)
+
+        local o = e["cls"]["mt"]["__newindex"]
+        e["cls"]["mt"]["__newindex"] = function(t, k, v)
+            print("[WareAI] Property changed:", t.Name, k, "to", v)
+            return o(t, k, v)
+        end
+
+        e["fn"]["rw"](true)
+    end
+)
+
+--// UND, ?*
+e["fn"]["sp"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["sp"] then
+            return
+        end
+
+        e["fn"]["rw"](false)
+
+        local o = e["cls"]["mt"]["__index"]
+        e["cls"]["mt"]["__index"] = function(t, k)
+            if k == "Value" then
+                print("[WareAI] Property spoofed:", t.Name, k)
+                return "SpoofedValue"
+            end
+            return o(t, k)
+        end
+
+        e["fn"]["rw"](true)
+    end
+)
+
+e["fn"]["hk"] =
+    e["fn"]["try"](
+    function()
+        if not e["cfg"]["hk"] then
+            return
+        end
+
+        hookfunction(
+            game.HttpService.RequestAsync,
+            function(...)
+                print("[WareAI] Hooked HttpService RequestAsync.")
+                return {Success = true, StatusCode = 200, Body = "SpoofedResponse"}
+            end
+        )
+
+        hookfunction(
+            setmetatable,
+            function(t, mt)
+                print("[WareAI] Setmetatable hook triggered.")
+                return setmetatable(t, mt)
+            end
+        )
+    end
+)
+
+
+--// MULT-NTI ( CALL ), ?(FUNCTIONS)
+e["fn"]["dm"]()
+e["fn"]["sc"]()
+e["fn"]["pk"]()
+e["fn"]["ms"]()
+e["fn"]["bc"]()
+e["fn"]["si"]()
+e["fn"]["ac"]()
+e["fn"]["ma"]()
+e["fn"]["lg"]()
+e["fn"]["sp"]()
+e["fn"]["hk"]()
+
+StarterGui:SetCore(
+    "SendNotification",
+    {Title = "Lib-WareAI", Text = "GENERATED LOG. : (MTD:Ban, Kick). CLSS secured. sc: SCR, MTD:CONT ?EXT opt, MULT- (HT, WS, RS) active. Init completed.", Duration = 8}
+)
+
+return WareAI --// clss ?nti
